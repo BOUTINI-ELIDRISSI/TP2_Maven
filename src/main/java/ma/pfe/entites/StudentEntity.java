@@ -6,8 +6,6 @@ import java.util.List;
 @Entity
 @Table(name = "T_Student")
 public class StudentEntity {
-    //@Id
-    //private long id;
     @EmbeddedId
     private CleEntity cle;
 
@@ -15,6 +13,10 @@ public class StudentEntity {
     private  String name;
     @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     private List<CourseEntity> courses;
+
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    private NiveauEntity niveau;
+
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "rue", column = @Column(name = "rue_student")),
@@ -22,6 +24,13 @@ public class StudentEntity {
     })
     private AdresseEntity adresse;
 
+    public NiveauEntity getNiveau() {
+        return niveau;
+    }
+
+    public void setNiveau(NiveauEntity niveau) {
+        this.niveau = niveau;
+    }
 
     public List<CourseEntity> getCourses() {
         return courses;
@@ -47,14 +56,6 @@ public class StudentEntity {
         this.cle = cle;
     }
 
-    /*public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }*/
-
     public String getName() {
         return name;
     }
@@ -63,12 +64,5 @@ public class StudentEntity {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "StudentEntity{" +
-                "cle=" + cle +
-                ", name='" + name + '\'' +
-                ", adresse=" + adresse +
-                '}';
-    }
+
 }

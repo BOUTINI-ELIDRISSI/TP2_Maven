@@ -1,6 +1,6 @@
 package ma.pfe.dots;
 
-/*public class NiveauDto {
+public class NiveauDto {
     private long id;
     private String label;
 
@@ -28,4 +28,3 @@ package ma.pfe.dots;
                 '}';
     }
 }
-*/

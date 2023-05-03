@@ -9,7 +9,16 @@ public class StudentDto {
 
     private  String name;
     private List<CourseDto> courses;
+    private NiveauDto niveau;
     private AdresseDto adresse;
+
+    public NiveauDto getNiveau() {
+        return niveau;
+    }
+
+    public void setNiveau(NiveauDto niveau) {
+        this.niveau = niveau;
+    }
 
     public CleDto getCle() {
         return cle;
@@ -18,14 +27,6 @@ public class StudentDto {
     public void setCle(CleDto cle) {
         this.cle = cle;
     }
-
-    /*public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }*/
 
     public String getName() {
         return name;
@@ -56,6 +57,8 @@ public class StudentDto {
         return "StudentDto{" +
                 "cle=" + cle +
                 ", name='" + name + '\'' +
+                ", courses=" + courses +
+                ", niveau=" + niveau +
                 ", adresse=" + adresse +
                 '}';
     }
