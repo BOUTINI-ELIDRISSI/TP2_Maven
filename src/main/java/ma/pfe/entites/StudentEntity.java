@@ -1,37 +1,74 @@
 package ma.pfe.entites;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "T_Student")
 public class StudentEntity {
-    @Id
-    private long id;
-    private  String nom;
+    //@Id
+    //private long id;
+    @EmbeddedId
+    private CleEntity cle;
 
-    public long getId() {
+    @Column(name = "name_student")
+    private  String name;
+    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    private List<CourseEntity> courses;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "rue", column = @Column(name = "rue_student")),
+            @AttributeOverride(name = "avenue", column = @Column(name = "avenue_student"))
+    })
+    private AdresseEntity adresse;
+
+
+    public List<CourseEntity> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<CourseEntity> courses) {
+        this.courses = courses;
+    }
+
+    public AdresseEntity getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(AdresseEntity adresse) {
+        this.adresse = adresse;
+    }
+
+    public CleEntity getCle() {
+        return cle;
+    }
+
+    public void setCle(CleEntity cle) {
+        this.cle = cle;
+    }
+
+    /*public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
+    }*/
+
+    public String getName() {
+        return name;
     }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return "StudentDto{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
+        return "StudentEntity{" +
+                "cle=" + cle +
+                ", name='" + name + '\'' +
+                ", adresse=" + adresse +
                 '}';
     }
 }
